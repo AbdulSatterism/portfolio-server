@@ -3,7 +3,7 @@ import { TDevInfo } from './developerInfo.interface';
 
 const devInfoSchema = new Schema<TDevInfo>(
   {
-    name: { type: String, required: true },
+    name: { type: String, required: true, unique: true },
     title: { type: String, required: true },
     summary: { type: String, required: true },
     email: { type: String, required: true, unique: true },

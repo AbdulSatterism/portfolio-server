@@ -1,27 +1,32 @@
 import { Router } from 'express';
-import { BikeRoutes } from '../modules/bike/bike.route';
+import { ProjectRoutes } from '../modules/project/project.route';
+import { SkillRoutes } from '../modules/skill/skill.route';
+import { DevInfoRoutes } from '../modules/developerInfo/developerInfo.route';
+import { EducationRoutes } from '../modules/education/education.route';
 import { AuthRoutes } from '../modules/auth/auth.route';
-import { UserRoutes } from '../modules/user/user.route';
-import { BookingRoutes } from '../modules/booking/booking.route';
 
 const router = Router();
 
 const moduleRoutes = [
   {
-    path: '/bikes',
-    route: BikeRoutes,
+    path: '/projects',
+    route: ProjectRoutes,
+  },
+  {
+    path: '/skills',
+    route: SkillRoutes,
+  },
+  {
+    path: '/dev-info',
+    route: DevInfoRoutes,
+  },
+  {
+    path: '/educations',
+    route: EducationRoutes,
   },
   {
     path: '/auth',
     route: AuthRoutes,
-  },
-  {
-    path: '/users',
-    route: UserRoutes,
-  },
-  {
-    path: '/rentals',
-    route: BookingRoutes,
   },
 ];
 

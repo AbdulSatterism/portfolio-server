@@ -18,7 +18,7 @@ const updateEducationValidationSchema = z.object({
   }),
 });
 
-export const skillValidations = {
+export const educationValidations = {
   createEducationValidationSchema,
   updateEducationValidationSchema,
 };
