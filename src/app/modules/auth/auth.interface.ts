@@ -2,8 +2,8 @@ import { USER_ROLE } from './auth.const';
 
 export type TSignup = {
   email: string;
+  role: string;
   password: string;
-  role: 'admin' | 'user';
 };
 
 export type TLogin = {

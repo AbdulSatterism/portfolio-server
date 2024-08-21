@@ -1,8 +1,10 @@
-// import httpStatus from 'http-status';
-// import AppError from '../../errors/appError';
-import { TSignup } from './auth.interface';
-// import config from '../../config';
-// import { createToken } from './auth.utils';
+import jwt from 'jsonwebtoken';
+import httpStatus from 'http-status';
+import AppError from '../../errors/appError';
+import { TLogin, TSignup } from './auth.interface';
+import bcrypt from 'bcrypt';
+import config from '../../config';
+
 import { Auth } from './auth.model';
 
 const signupUserInDB = async (payload: TSignup) => {
@@ -10,45 +12,46 @@ const signupUserInDB = async (payload: TSignup) => {
   return result;
 };
 
-// const loginUser = async (payload: TLogin) => {
-//   const { email, password } = payload;
+const loginUser = async (payload: TLogin) => {
+  const { email, password } = payload;
 
-//   // check user exist or not
-//   const user = await User.findOne({ email: email }).select('+password');
+  // check user exist or not
+  const user = await Auth.findOne({ email: email });
 
-//   if (!user) {
-//     throw new AppError(httpStatus.NOT_FOUND, 'this user not found');
-//   }
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, 'this user not found');
+  }
 
-//   //password matched or not
-//   const hashPassword = user?.password;
-//   const isPasswordMatch = await User.isPasswordMatched(password, hashPassword);
-//   if (!isPasswordMatch) {
-//     throw new AppError(httpStatus.FORBIDDEN, 'password not matched!!!');
-//   }
+  //password matched or not
+  const hashPassword = user?.password;
+  const isPasswordMatch = await bcrypt.compare(password, hashPassword);
+  if (!isPasswordMatch) {
+    throw new AppError(httpStatus.FORBIDDEN, 'password not matched!!!');
+  }
 
-//   //   jwt access token
-//   type TJWTPayload = {
-//     userId: any;
-//     role: 'admin' | 'user';
-//   };
+  //    jwt access token
+  type TJWTPayload = {
+    role: string;
+    email: string;
+  };
 
-//   const jwtPayload: TJWTPayload = {
-//     userId: user?._id,
-//     role: user?.role,
-//   };
+  const jwtPayload: TJWTPayload = {
+    role: user?.role,
+    email: user?.email,
+  };
 
-//   const accessToken = createToken(
-//     jwtPayload,
-//     config.jwt_access_token as string,
-//     config.jwt_access_expire_in as string,
-//   );
+  const accessToken = await jwt.sign(
+    jwtPayload,
+    config.jwt_access_token as string,
+    {
+      expiresIn: config.jwt_access_expire_in,
+    },
+  );
 
-//   const userRes = await User.findOne({ email: email });
-
-//   return { accessToken, userRes };
-// };
+  return accessToken;
+};
 
 export const authServices = {
-   signupUserInDB,
+  signupUserInDB,
+  loginUser,
 };

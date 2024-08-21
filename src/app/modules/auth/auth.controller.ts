@@ -14,18 +14,18 @@ const signupUser = catchAsync(async (req, res) => {
   });
 });
 
-// const loginUser = catchAsync(async (req, res) => {
-//   const result = await authServices.loginUser(req.body);
+const loginUser = catchAsync(async (req, res) => {
+  const result = await authServices.loginUser(req.body);
 
-//   sendResponse(res, {
-//     statusCode: httpStatus.OK,
-//     success: true,
-//     message: 'user login successfully',
-//     token: result?.accessToken,
-//     data: result?.userRes,
-//   });
-// });
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'user login successfully',
+    data: result,
+  });
+});
 
 export const authControllers = {
   signupUser,
+  loginUser,
 };
