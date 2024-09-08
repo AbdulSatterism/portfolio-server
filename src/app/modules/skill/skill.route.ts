@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post(
   '/create-skill',
-  auth('admin'),
+  // auth('admin'),
   validateRequest(skillValidations.createSkillValidationSchema),
   skillControllers.createSkill,
 );
