@@ -15,6 +15,8 @@ router.post(
 
 router.get('/', projectControllers.getAllProjects);
 
+router.get('/:id', auth('admin'), projectControllers.singleProject);
+
 router.put(
   '/:id',
   auth('admin'),

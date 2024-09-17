@@ -6,7 +6,7 @@ import config from '../../config';
 const authSchema = new Schema<TSignup>(
   {
     email: { type: String, required: true, unique: true },
-    role: { type: String, default: 'admin' },
+    role: { type: String, default: 'user' },
     password: { type: String, required: true },
   },
   { timestamps: true },

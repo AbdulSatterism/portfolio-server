@@ -7,7 +7,9 @@ const createSkillIntoDB = async (payload: TSkill) => {
 };
 
 const getAllSkillFromDB = async () => {
-  const result = await Skill.find();
+  const result = await Skill.find().sort({
+    createdAt: -1,
+  });
   return result;
 };
 

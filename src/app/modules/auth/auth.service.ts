@@ -51,7 +51,35 @@ const loginUser = async (payload: TLogin) => {
   return accessToken;
 };
 
+const allUserFromDB = async () => {
+  const result = await Auth.find();
+  return result;
+};
+
+const toggleRoleInDB = async (id: string) => {
+  const user = await Auth.findById(id);
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, 'user not found');
+  }
+
+  // Toggle the role
+  const result = await Auth.findByIdAndUpdate(
+    id,
+    { role: user.role === 'admin' ? 'user' : 'admin' },
+    { new: true },
+  );
+  return result;
+};
+
+const deleteUserFromDB = async (id: string) => {
+  const result = await Auth.findByIdAndDelete(id, { new: true });
+  return result;
+};
+
 export const authServices = {
   signupUserInDB,
   loginUser,
+  deleteUserFromDB,
+  allUserFromDB,
+  toggleRoleInDB,
 };
