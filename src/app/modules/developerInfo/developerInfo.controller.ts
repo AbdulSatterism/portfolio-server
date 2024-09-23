@@ -25,6 +25,17 @@ const getAllDevInfo = catchAsync(async (req, res) => {
   });
 });
 
+const singleDev = catchAsync(async (req, res) => {
+  const result = await DevInfoServices.singleDev(req.params.id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Developer retrieved successfully',
+    data: result,
+  });
+});
+
 const updateDevInfo = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await DevInfoServices.updateDevInfoIntoDB(id, req.body);
@@ -54,4 +65,5 @@ export const devInfoControllers = {
   getAllDevInfo,
   updateDevInfo,
   deleteDevInfo,
+  singleDev,
 };

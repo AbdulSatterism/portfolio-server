@@ -11,6 +11,11 @@ const getAllDevInfoFromDB = async () => {
   return result;
 };
 
+const singleDev = async (id:string) => {
+  const result = await DevInfo.findById(id)
+  return result;
+};
+
 const updateDevInfoIntoDB = async (id: string, payload: Partial<TDevInfo>) => {
   const result = await DevInfo.findByIdAndUpdate(id, payload, {
     new: true,
@@ -28,4 +33,5 @@ export const DevInfoServices = {
   getAllDevInfoFromDB,
   updateDevInfoIntoDB,
   deleteDevInfoFromDB,
+  singleDev
 };

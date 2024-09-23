@@ -1,5 +1,6 @@
 export type TDevInfo = {
   name: string;
+  image:string;
   title: string;
   summary: string;
   email: string;

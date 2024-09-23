@@ -22,6 +22,8 @@ router.put(
 
 router.get('/', devInfoControllers.getAllDevInfo);
 
+router.get('/:id', devInfoControllers.singleDev);
+
 router.delete('/:id', auth('admin'), devInfoControllers.deleteDevInfo);
 
 export const DevInfoRoutes = router;
