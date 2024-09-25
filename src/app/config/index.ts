@@ -9,4 +9,6 @@ export default {
   salt_round: process.env.SALT,
   jwt_access_token: process.env.JWT_ACCESS_TOKEN,
   jwt_access_expire_in: process.env.JWT_ACCESS_EXPIRE_IN,
+  mail_pass: process.env.MAIL_PASS,
+  host_mail: process.env.HOST_EMAIL,
 };
