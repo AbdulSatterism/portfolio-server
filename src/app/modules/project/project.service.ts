@@ -7,14 +7,12 @@ const createProjectIntoDB = async (payload: TProject) => {
 };
 
 const getAllProjectsFromDB = async () => {
-  const result = await Project.find().sort({
-    createdAt: -1,
-  });
+  const result = await Project.find();
   return result;
 };
 
-const getSingleProjectFromDB = async (id:string) => {
-  const result = await Project.findById(id)
+const getSingleProjectFromDB = async (id: string) => {
+  const result = await Project.findById(id);
   return result;
 };
 
@@ -35,5 +33,5 @@ export const projectServices = {
   getAllProjectsFromDB,
   updateProjectIntoDB,
   deleteProjectFromDB,
-  getSingleProjectFromDB
+  getSingleProjectFromDB,
 };
